@@ -11,6 +11,7 @@ import edu.campusnum.visualsort.model.ObservableArray;
 public class QuickSort implements SortAlgorithm{
     @Override
     public void sort(ObservableArray array) {
+
         throw new UnsupportedOperationException("Not implemented");
     }
 }
