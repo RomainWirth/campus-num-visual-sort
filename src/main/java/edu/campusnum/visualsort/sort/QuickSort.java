@@ -15,7 +15,7 @@ public class QuickSort implements SortAlgorithm{
         int first = 0;
         int n = array.getLength();
         int last = n - 1;
-        quickSort(array, first, last);
+        quickSort(array);
     }
 
     /**
@@ -29,12 +29,15 @@ public class QuickSort implements SortAlgorithm{
      * @param last
      * => index de fin
      */
-    public void quickSort(ObservableArray array, int first, int last) {
-        if (first < last) {
-            int partitionIndex = partition(array, first, last);
-            // trie les éléments de manière récursive, séparément avant et après la partition
-            quickSort(array, first, partitionIndex - 1);
-            quickSort(array, partitionIndex + 1, last);
+    public void quickSort(ObservableArray array) {
+        if (array.getLength() > 1) {
+            int partitionIndex = partition(array);
+            // trie les éléments de la  séparément avant et après la partition, de manière récursive
+            quickSort(array.slice(0,partitionIndex));
+            if((array.getLength() - partitionIndex - 1) > 1) {
+                quickSort(array.slice(partitionIndex + 1, array.getLength() - partitionIndex - 1));
+            }
+            System.out.println(partitionIndex);
         }
     }
 
@@ -52,13 +55,13 @@ public class QuickSort implements SortAlgorithm{
      * @return
      * => retourne la partition de l'index à la bonne place
      */
-    public int partition(ObservableArray array, int first, int last) {
+    public int partition(ObservableArray array) {
         // initialisation du pivot : dernier index
-        int pivot = last;
+        int pivot = array.getLength()-1;
         // index du plus petit élément et indique la position correcte du pivot
-        int i = (first - 1);
+        int i = - 1;
         // index de l'élément courant
-        for (int j = first; j <= pivot - 1; j++) {
+        for (int j = 0; j <= pivot - 1; j++) {
             // si l'élément courant est plus petit que le pivot
             if (array.compare(pivot, j).equals(Order.Higher)) {
                 // on incrémente de l'index du plus petit élément
